@@ -113,10 +113,10 @@
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 neon-text-cyan">
                     Sblocco 100% Software
                 </span><br>
-                per i tuoi clienti Bosch.
+                fino a 32 km/h reali.
             </h1>
             <p class="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-2xl" style="font-size: 19px;">
-                Offri ai tuoi clienti e-bike lo sblocco della velocità senza smontare il motore, senza cablaggi fisici e senza invalidare fisicamente la garanzia. Tu trovi il cliente, noi eseguiamo l'intervento software. Margini elevati, zero rischi d'officina.
+                Offri ai tuoi clienti e-bike lo sblocco software a 32 km/h. Sfrutta il limite ottimale per mantenere i calcoli di velocità reali a display ed evitare l'anti-tuning Bosch. Nessuno smontaggio motore, nessun cavo tagliato, nessun chip fisico.
             </p>
             
             <!-- Doppie CTA ravvicinate per azzerare l'attrito -->
@@ -193,7 +193,7 @@
                 Verificatore di Compatibilità Digitale
             </h2>
             <p class="text-gray-400 mt-2">
-                Inserisci i dati tecnici della e-bike del cliente per verificare immediatamente la fattibilità del nostro sblocco software.
+                Inserisci i dati tecnici della e-bike originale del cliente per verificare immediatamente la fattibilità del nostro sblocco software.
             </p>
         </div>
 
@@ -204,7 +204,7 @@
             <div class="flex justify-between items-center mb-8 max-w-md mx-auto">
                 <div class="flex flex-col items-center">
                     <div id="step-dot-1" class="w-8 h-8 rounded-full bg-cyan-500 text-slate-950 font-bold flex items-center justify-center text-sm transition-colors duration-300">1</div>
-                    <span class="text-xs text-gray-400 mt-1">Magnete</span>
+                    <span class="text-xs text-gray-400 mt-1">Magnete Originale</span>
                 </div>
                 <div class="h-0.5 bg-gray-800 flex-grow mx-2" id="line-1"></div>
                 <div class="flex flex-col items-center">
@@ -220,17 +220,17 @@
 
             <!-- STEP 1: Magnete -->
             <div id="step-1" class="space-y-6">
-                <h3 class="text-lg font-bold text-white text-center font-outfit">Dove si trova il magnete originale della ruota posteriore?</h3>
+                <h3 class="text-lg font-bold text-white text-center font-outfit">In quale posizione si trova il magnete originale di fabbrica?</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <button type="button" onclick="selectMagnet('raggi')" class="glass-panel hover:border-cyan-500/50 p-6 rounded-xl flex flex-col items-center space-y-3 transition duration-200 border border-gray-800">
                         <span class="text-3xl">⚙️</span>
                         <span class="font-bold text-white">Sui Raggi della Ruota</span>
-                        <span class="text-xs text-gray-500 text-center">Magnete classico visibile montato su un raggio della ruota posteriore.</span>
+                        <span class="text-xs text-gray-500 text-center">Magnete originale Bosch visibile montato su uno dei raggi della ruota posteriore.</span>
                     </button>
                     <button type="button" onclick="selectMagnet('valvola')" class="glass-panel hover:border-cyan-500/50 p-6 rounded-xl flex flex-col items-center space-y-3 transition duration-200 border border-gray-800">
                         <span class="text-3xl">🎈</span>
-                        <span class="font-bold text-white">Sulla Valvola (Rim Magnet)</span>
-                        <span class="text-xs text-gray-500 text-center">Magnete integrato sulla valvola dell'aria del cerchione posteriore.</span>
+                        <span class="font-bold text-white">Sulla Valvola dell'Aria</span>
+                        <span class="text-xs text-gray-500 text-center">Magnete originale Bosch integrato direttamente nella valvola dell'aria del cerchione posteriore.</span>
                     </button>
                 </div>
             </div>
@@ -540,29 +540,21 @@
           if (isNaN(major) || isNaN(minor)) {
               resultBox.classList.add("bg-red-500/10", "border-red-500/20");
               title = "⚠️ Errore di formato";
-              description = "Il formato del firmware inserito non è valido. Per favore, inserisci un formato corretto.";
-          } else if (selectedMagnet === 'valvola') {
-              if (major < 19 || (major === 19 && minor <= 24)) {
-                  isCompatible = true;
-                  resultBox.classList.add("bg-emerald-500/10", "border-emerald-500/20");
-                  title = "✅ COMPATIBILE CON VELOMOTION (32 km/h)";
-                  description = `La e-bike è compatibile. Applicheremo lo sblocco software a 32 km/h per preservare i calcoli reali sul display.`;
+              description = "Il formato del firmware inserito non è valido. Per favore, inserisci un formato corretto (es: 15.24.2).";
+          } else if (major < 19 || (major === 19 && minor <= 24)) {
+              isCompatible = true;
+              resultBox.classList.add("bg-emerald-500/10", "border-emerald-500/20");
+              title = "✅ COMPATIBILE CON VELOMOTION (32 km/h)";
+              
+              if (selectedMagnet === 'valvola') {
+                  description = `La e-bike con sensore sulla valvola (Rim Magnet) è compatibile. Applicheremo lo sblocco software a 32 km/h. Questa velocità rappresenta il limite ottimale per preservare i calcoli reali sul display Purion 200 ed aggirare stabilmente l'anti-tuning Bosch.`;
               } else {
-                  resultBox.classList.add("bg-amber-500/10", "border-amber-500/20");
-                  title = "⚠️ Richiede Kit Hardware Aggiuntivo";
-                  description = `I sistemi Rim Magnet superiori a 19.24.0 non supportano lo sblocco 100% software.`;
+                  description = `La e-bike con sensore classico sui raggi è compatibile. Applicheremo lo sblocco software sicuro a 32 km/h per garantire dati reali a display e prevenire l'errore 504. <br><br><span class="text-cyan-400 font-semibold">🔥 Opzione sblocco 45 km/h: In arrivo con kit di conversione hardware dedicato (disponibile prossimamente).</span>`;
               }
           } else {
-              if (major < 19 || (major === 19 && minor <= 24)) {
-                  isCompatible = true;
-                  resultBox.classList.add("bg-emerald-500/10", "border-emerald-500/20");
-                  title = "✅ COMPATIBILE CON VELOMOTION (45 km/h)";
-                  description = `La e-bike è totalmente compatibile. Sblocco software fino a 45 km/h garantito.`;
-              } else {
-                  resultBox.classList.add("bg-amber-500/10", "border-amber-500/20");
-                  title = "⚠️ Firmware non supportato";
-                  description = `La versione software inserita è troppo recente per lo sblocco software istantaneo.`;
-              }
+              resultBox.classList.add("bg-amber-500/10", "border-amber-500/20");
+              title = "⚠️ Firmware molto recente";
+              description = `La versione software ${fwInput} inserita è troppo recente per lo sblocco software istantaneo. Contattaci su WhatsApp per verificare se è disponibile un aggiornamento dello strumento.`;
           }
       
           resultBox.innerHTML = `
@@ -596,11 +588,13 @@
               .catch(err => console.error('Errore durante l\'invio dati a n8n:', err));
           }
       
-          // Mantieni il link WhatsApp come fallback o disabilitalo a favore del flusso automatico
-          whatsappLink.href = "#";
-          whatsappLink.innerHTML = "Richiesta Sblocco Inviata";
-          whatsappLink.classList.replace('bg-cyan-500', 'bg-emerald-600');
-          whatsappLink.classList.add('pointer-events-none');
+          // Aggiorna il link WhatsApp per l'invio della richiesta
+          const waNumber = "390000000000"; // Inserisci il tuo numero reale qui
+          const waMessage = `Ciao Riccardo, ho appena eseguito la verifica sul sito VeloMotion. La e-bike risulta COMPATIBILE (32 km/h) con questi dati:\n\n- Magnete: ${selectedMagnet === 'valvola' ? 'Valvola (Rim Magnet)' : 'Raggi'}\n- Display: ${selectedDisplay}\n- Firmware: ${fwInput}\n- ID Cliente/Bici: ${nomeClienteInput}\n\nVorrei maggiori dettagli sulla partnership per la mia officina.`;
+          whatsappLink.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
+          whatsappLink.innerHTML = "Invia Dati e Prenota Sblocco";
+          whatsappLink.classList.replace('bg-emerald-600', 'bg-cyan-500');
+          whatsappLink.classList.remove('pointer-events-none');
       
           document.getElementById('step-3').classList.add('hidden');
           document.getElementById('step-result').classList.remove('hidden');
