@@ -1,4 +1,11 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/velomotion.apk",
+      "destination": "https://github.com/Rickym2025/VeloMotion/releases/download/v1.0.0/velomotion.apk",
+      "permanent": true
+    }
+  ]
 }
