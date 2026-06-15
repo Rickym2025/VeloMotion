@@ -19,17 +19,27 @@
         <h2 class="text-3xl font-bold text-white" style="font-family: 'Outfit';">VELO<span class="text-cyan-400">MOTION</span></h2>
         <p class="text-xs text-gray-400 uppercase tracking-widest">Accesso Riservato Officine</p>
         
-        <div class="space-y-4">
+        <div class="space-y-4 text-left">
             <div>
-                <label for="token-input" class="block text-xs text-gray-500 uppercase mb-2 text-left">Inserisci Codice Accesso Officina</label>
-                <input type="password" id="token-input" placeholder="Codice Officina..." class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 text-center font-mono text-lg">
+                <label for="token-input" class="block text-xs text-gray-500 uppercase mb-2">Inserisci Codice Accesso Officina</label>
+                <div class="relative">
+                    <input type="password" id="token-input" placeholder="Codice Officina..." class="w-full bg-slate-900 border border-gray-700 rounded-xl pl-4 pr-12 py-3 text-white focus:outline-none focus:border-cyan-500 text-center font-mono text-lg">
+                    <!-- Pulsante Mostra/Nascondi con icona SVG -->
+                    <button type="button" onclick="togglePasswordVisibility()" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition">
+                        <svg id="eye-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <!-- Icona Occhio Aperto (Default) -->
+                            <path id="eye-open" stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path id="eye-open-back" stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            <!-- Icona Occhio Chiuso (Nascosta inizialmente) -->
+                            <path id="eye-closed-slash" class="hidden" stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M3 3l18 18" />
+                        </svg>
+                    </button>
+                </div>
             </div>
             <button onclick="handleLogin()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-4 rounded-xl transition font-outfit" style="font-family: 'Outfit';">
                 Accedi alla Dashboard
             </button>
         </div>
-        <p id="login-error" class="hidden text-red-400 text-sm font-semibold">Codice non valido. Riprova.</p>
-    </div>
 
     <!-- SCHERMATA DASHBOARD (Nascosta inizialmente) -->
     <div id="dashboard-screen" class="hidden max-w-xl w-full glass-panel rounded-2xl p-8 neon-border space-y-6">
@@ -126,7 +136,7 @@
             .then(data => {
                 if (data && data.length > 0) {
                     officinaCorrente = data[0];
-                    document.getElementById('login-screen').classList.add('hidden');
+                    document.getElementById('').classList.add('hidden');
                     document.getElementById('nome-officina').innerText = officinaCorrente.nome_officina;
                     document.getElementById('crediti-residui').innerText = `${officinaCorrente.crediti} Sblocchi`;
                     document.getElementById('dashboard-screen').classList.remove('hidden');
@@ -162,7 +172,7 @@
         function handleLogout() {
             localStorage.removeItem('rivenditore_token');
             document.getElementById('dashboard-screen').classList.add('hidden');
-            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('').classList.remove('hidden');
             document.getElementById('token-input').value = '';
         }
 
