@@ -242,7 +242,7 @@
                 per i tuoi clienti Bosch.
             </h1>
             <p class="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-2xl" style="font-size: 19px;">
-                La prima soluzione software invisibile che imposta l'assistenza al **limite massimo di 32 km/h reali** [1.1.1]. È la soglia tecnica ideale: mantiene la velocità reale indicata sul display ed evita gli errori di blocco della centralina Bosch Smart System (Errore 504) [1.1.1, 1.1.4].
+                La prima soluzione software invisibile che imposta l'assistenza al **limite massimo di 32 km/h reali**[[4](https://www.google.com/url?sa=E&q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFHSSAwPh8pbGQneaIZc_mA-Ka-GOwd8Jm3YxFHTXP_HWHJDjGliYhcNWJQA2FQy-kxiGuFD2OXJeo1vEmW6nrDh3THIDrXLuv4DjE9hKGCE4QOCL0TxE9QKJi6F5clPTkCpm2wthiv3kYcZF-bNsOj6OzFoKb8-OM1nUnA1YBAvKL-kO-F9NqST74lIm34LwoPserhIRHHzUdNcYNUrmYxnadFHXwGrko6VZVpXUTIrAM%3D)]. È la soglia tecnica ideale: mantiene la velocità reale indicata sul display ed evita gli errori di blocco della centralina Bosch Smart System (Errore 504)[[4](https://www.google.com/url?sa=E&q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFHSSAwPh8pbGQneaIZc_mA-Ka-GOwd8Jm3YxFHTXP_HWHJDjGliYhcNWJQA2FQy-kxiGuFD2OXJeo1vEmW6nrDh3THIDrXLuv4DjE9hKGCE4QOCL0TxE9QKJi6F5clPTkCpm2wthiv3kYcZF-bNsOj6OzFoKb8-OM1nUnA1YBAvKL-kO-F9NqST74lIm34LwoPserhIRHHzUdNcYNUrmYxnadFHXwGrko6VZVpXUTIrAM%3D)][[5](https://www.google.com/url?sa=E&q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQFVBHKAsMLrOYjshVPbpJ-3cCkWo8NOS8euf7jOf44k5o_f8Lba6nOCuiOy5z2f1T81gyeXn3whEb9eLe8uthCGy4HgSCcg-d2ew9LApq_MHsqH1OHigdr6tEjAz2Sm7ZccRhl1xvKh)].
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 pt-4">
@@ -419,7 +419,7 @@
                         Verifica un'altra bici
                     </button>
                     <a id="whatsapp-link" href="mailto:info@rmstudio.app?subject=Sblocco%20VeloMotion%20Pronto" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-3 rounded-lg text-center font-outfit transition duration-200">
-                        Richiesta Ricevuta con Successo
+                        Richiesta Inviata con Successo
                     </a>
                 </div>
             </div>
@@ -668,6 +668,23 @@
             document.getElementById('step-2').classList.remove('hidden');
         }
 
+        // --- CARICAMENTO RUOTA ORBITALE RM STUDIO ---
+        // Utilizziamo l'URL assoluto del tuo dominio master per evitare blocchi sul sottodominio
+        const orbitTemplateUrl = '/public/orbit-template?v=' + new Date().getTime();
+        
+        fetch(orbitTemplateUrl)
+            .then(res => {
+                if (!res.ok) throw new Error("Errore nel caricamento del file orbitale");
+                return res.text();
+            })
+            .then(html => {
+                const target = document.getElementById('orbit-container-target');
+                if (target) {
+                    target.innerHTML = html;
+                }
+            })
+            .catch(err => console.error("Errore nel caricamento della ruota orbitale:", err));
+        
         function selectDisplay(displayType) {
             selectedDisplay = displayType;
             
@@ -925,22 +942,7 @@
             if (indicator) indicator.remove();
         }
 
-        // --- CARICAMENTO RUOTA ORBITALE RM STUDIO ---
-        // Puntiamo al percorso locale: Vercel si occuperà di prelevare l'originale senza blocchi CORS
-        const orbitTemplateUrl = '/public/orbit-template.html?v=' + new Date().getTime();
-        
-        fetch(orbitTemplateUrl)
-            .then(res => {
-                if (!res.ok) throw new Error("Errore nel caricamento del file orbitale");
-                return res.text();
-            })
-            .then(html => {
-                const target = document.getElementById('orbit-container-target');
-                if (target) {
-                    target.innerHTML = html;
-                }
-            })
-            .catch(err => console.error("Errore nel caricamento della ruota orbitale:", err));
+       
         
         
     </script>
@@ -978,7 +980,7 @@
                 <div class="flex items-start space-x-2.5">
                     <img src="/icon.png" class="w-6 h-6 rounded-md mt-1">
                     <div class="bg-slate-900 border border-gray-800 text-gray-200 rounded-2xl rounded-tl-none p-3 max-w-[85%] leading-relaxed">
-                        Ciao! Sono Valentina, l'assistente virtuale d'officina di VeloMotion. Come ti posso aiutare? ⚡
+                        Ciao! Sono Valentina, l'assistente virtuale d'officina di VeloMotion. Come posso aiutare la tua officina oggi? ⚡
                     </div>
                 </div>
             </div>
