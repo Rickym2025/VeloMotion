@@ -86,6 +86,130 @@
             background: #1e293b;
             border-radius: 99px;
         }
+
+        /* ─── ANIMAZIONI E STILI PER IL SISTEMA ORBITALE ECOsistema ─── */
+    @keyframes orbit-rotation {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes counter-rotation {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+    @keyframes pulse-ring-optimized {
+      0%, 100% { opacity: 0.15; transform: scale(0.95); }
+      50% { opacity: 0.35; transform: scale(1.05); }
+    }
+    .pulse-ring-element {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      background-color: rgba(6, 182, 212, 0.05);
+      filter: blur(48px);
+      border-radius: 9999px;
+      will-change: transform, opacity;
+      animation: pulse-ring-optimized 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .orbit-ring {
+      position: relative;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+      animation: orbit-rotation 40s linear infinite;
+    }
+    .orbit-wrapper {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      transform: translate(-50%, -50%);
+    }
+    .orbit-item {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      animation: counter-rotation 40s linear infinite;
+      transform-origin: center;
+    }
+    .orbit-link {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-sizing: border-box;
+      transition: 0.3s;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .orbit-link:hover {
+      border-color: #06b6d4;
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+    }
+    .orbit-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .orbit-img.cover {
+      object-fit: cover;
+    }
+    .orbit-img.rounded {
+      border-radius: 9999px;
+    }
+    .orbit-center-photo {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid #06b6d4;
+      padding: 4px;
+      background: #000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      z-index: 10;
+      box-sizing: border-box;
+    }
+    .orbit-center-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .orbit-tooltip {
+      position: absolute;
+      bottom: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      background: #0a0a0c;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #94a3b8;
+      font-size: 11px;
+      border-radius: 8px;
+      padding: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      text-align: center;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      line-height: 1.4;
+    }
+    .orbit-tooltip b {
+      color: white;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .orbit-item:hover .orbit-tooltip {
+      opacity: 1;
+    }
+        
     </style>
 </head>
 <body class="text-gray-200 min-h-screen overflow-x-hidden">
@@ -449,6 +573,27 @@
         </div>
     </section>
 
+    <!-- SEZIONE ECOsistema RM STUDIO (ORBITALE) -->
+    <section class="py-20 px-6 max-w-7xl mx-auto border-t border-gray-800 flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div class="max-w-xl space-y-6 text-left">
+            <span class="text-xs text-cyan-400 uppercase tracking-widest font-semibold font-mono">RM Studio Network</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-outfit leading-tight">
+                Parte di un Ecosistema AI Integrato e Connesso
+            </h2>
+            <p class="text-base text-gray-400 leading-relaxed" style="font-size: 17px;">
+                VeloMotion non lavora in isolamento. È parte integrante dell'ecosistema software di <strong>RM Studio</strong>, un laboratorio di ingegneria dedicato allo sviluppo di SaaS verticali d'avanguardia per l'automazione B2B e la digitalizzazione dei processi aziendali.
+            </p>
+            <a href="https://rmstudio.app" target="_blank" class="inline-block border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500 hover:text-slate-950 font-bold px-6 py-3 rounded-lg text-sm tracking-wider uppercase font-outfit transition duration-200">
+                Scopri l'Ecosistema RM Studio
+            </a>
+        </div>
+        
+        <!-- Ruota Orbitale dei SaaS (Caricata in automatico via JS) -->
+        <div id="orbit-container-target" class="relative w-[380px] h-[380px] flex items-center justify-center scale-90 md:scale-100 pointer-events-auto">
+            <!-- La ruota orbitale viene iniettata qui tramite Fetch -->
+        </div>
+    </section>
+    
    <!-- Footer -->
     <footer class="py-12 px-6 border-t border-gray-800 text-gray-500 text-sm glass-panel mt-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -784,6 +929,24 @@
             const indicator = document.getElementById('typing-indicator');
             if (indicator) indicator.remove();
         }
+
+        // --- CARICAMENTO RUOTA ORBITALE RM STUDIO ---
+        // Utilizziamo l'URL assoluto del tuo dominio master per evitare blocchi sul sottodominio
+        const orbitTemplateUrl = 'https://rmstudio.app/public/orbit-template.html?v=' + new Date().getTime();
+        
+        fetch(orbitTemplateUrl)
+            .then(res => {
+                if (!res.ok) throw new Error("Errore nel caricamento del file orbitale");
+                return res.text();
+            })
+            .then(html => {
+                const target = document.getElementById('orbit-container-target');
+                if (target) {
+                    target.innerHTML = html;
+                }
+            })
+            .catch(err => console.error("Errore nel caricamento della ruota orbitale:", err));
+        
         
     </script>
     <!-- CHATBOT WIDGET FLUTTUANTE -->
