@@ -147,6 +147,25 @@
             .catch(err => console.error(err));
         }
 
+        function togglePasswordVisibility() {
+            const tokenInput = document.getElementById('token-input');
+            const eyeOpen = document.getElementById('eye-open');
+            const eyeOpenBack = document.getElementById('eye-open-back');
+            const eyeClosedSlash = document.getElementById('eye-closed-slash');
+
+            if (tokenInput.type === 'password') {
+                tokenInput.type = 'text';
+                eyeOpen.classList.add('hidden');
+                eyeOpenBack.classList.add('hidden');
+                eyeClosedSlash.classList.remove('hidden');
+            } else {
+                tokenInput.type = 'password';
+                eyeOpen.classList.remove('hidden');
+                eyeOpenBack.classList.remove('hidden');
+                eyeClosedSlash.classList.add('hidden');
+            }
+        }
+
         function handleLogin() {
             const token = document.getElementById('token-input').value.trim();
             if (!token) return;
