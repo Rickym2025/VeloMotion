@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /attiva
+
+Sitemap: https://velomotion.rmstudio.app/sitemap.xml
