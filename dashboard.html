@@ -21,7 +21,7 @@
         
         <div class="space-y-4 text-left">
             <div>
-                <label class="block text-xs text-gray-500 uppercase mb-2">Inserisci Codice Accesso Officina</label>
+                <label for="token-input" class="block text-xs text-gray-500 uppercase mb-2">Inserisci Codice Accesso Officina</label>
                 <div class="relative">
                     <input type="password" id="token-input" placeholder="Codice Officina..." class="w-full bg-slate-900 border border-gray-700 rounded-xl pl-4 pr-12 py-3 text-white focus:outline-none focus:border-cyan-500 text-center font-mono text-lg">
                     <!-- Pulsante Mostra/Nascondi con icona SVG -->
@@ -55,6 +55,40 @@
             <div class="text-right">
                 <span class="text-xs text-gray-500 uppercase tracking-wider block">Crediti Residui</span>
                 <span id="crediti-residui" class="text-2xl font-black text-emerald-400 block">-</span>
+            </div>
+        </div>
+
+        <!-- SEZIONE ACQUISTO CREDITI (QUANTITÀ DINAMICA STRIPE) -->
+        <div class="glass-panel p-6 rounded-xl border border-gray-800 space-y-6">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider font-outfit text-center">Acquista Sblocchi d'Officina</h4>
+            
+            <div class="flex items-center justify-between bg-slate-950/60 p-4 rounded-xl border border-gray-800">
+                <div class="text-left">
+                    <span class="text-xs text-gray-500 uppercase block">Prezzo Singolo Sblocco</span>
+                    <span class="text-lg font-extrabold text-white">€ 300,00</span>
+                </div>
+                
+                <!-- Selettore Quantità -->
+                <div class="flex items-center space-x-4 bg-slate-900 border border-gray-700 px-3 py-2 rounded-xl">
+                    <button onclick="changeQty(-1)" class="w-8 h-8 rounded-lg bg-gray-800 text-white font-bold text-lg hover:bg-gray-700 transition flex items-center justify-center focus:outline-none">
+                        -
+                    </button>
+                    <span id="qty-display" class="text-lg font-mono font-bold text-white w-6 text-center">1</span>
+                    <button onclick="changeQty(1)" class="w-8 h-8 rounded-lg bg-gray-800 text-white font-bold text-lg hover:bg-gray-700 transition flex items-center justify-center focus:outline-none">
+                        +
+                    </button>
+                </div>
+            </div>
+
+            <!-- Riepilogo e Pulsante di Acquisto -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                <div class="text-left w-full sm:w-auto">
+                    <span class="text-xs text-gray-500 uppercase block">Totale Carrello</span>
+                    <span id="total-price-display" class="text-2xl font-black text-cyan-400">€ 300,00</span>
+                </div>
+                <a id="btn-acquista-ricarica" href="#" target="_blank" class="w-full sm:w-auto bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-4 rounded-xl text-center font-outfit shadow-lg shadow-cyan-500/20">
+                    Acquista Ora su Stripe
+                </a>
             </div>
         </div>
 
@@ -116,6 +150,7 @@
         let officinaCorrente = null;
         let selectedMagnet = '';
         let selectedDisplay = '';
+        let currentQty = 1;
 
         window.onload = function() {
             const token = localStorage.getItem('rivenditore_token');
@@ -153,7 +188,12 @@
                     if (creditiResidui) {
                         creditiResidui.innerText = `${officinaCorrente.crediti} Sblocchi`;
                     }
+                    
+                    // Configura il link di acquisto Stripe in base all'email dell'officina loggata
+                    updateStripeLink();
+
                     if (dashboardScreen) {
+                        document.getElementById('total-price-display').innerText = `€ ${(currentQty * 300).toFixed(2).replace('.', ',')}`;
                         dashboardScreen.classList.remove('hidden');
                     }
                 } else {
@@ -165,6 +205,23 @@
                 }
             })
             .catch(err => console.error("Errore validazione token:", err));
+        }
+
+        // Gestione quantità e calcolo dinamico Stripe
+        function changeQty(amount) {
+            currentQty = Math.max(1, currentQty + amount);
+            document.getElementById('qty-display').innerText = currentQty;
+            document.getElementById('total-price-display').innerText = `€ ${(currentQty * 300).toFixed(2).replace('.', ',')}`;
+            updateStripeLink();
+        }
+
+        function updateStripeLink() {
+            if (officinaCorrente) {
+                // Sostituisci "YOUR_STRIPE_LINK_ID" con l'ID reale del tuo unico link Stripe da €300
+                const stripeLinkId = "YOUR_STRIPE_LINK_ID"; 
+                const encodedEmail = encodeURIComponent(officinaCorrente.email);
+                document.getElementById('btn-acquista-ricarica').href = `https://buy.stripe.com/${stripeLinkId}?prefilled_email=${encodedEmail}&quantity=${currentQty}`;
+            }
         }
 
         function togglePasswordVisibility() {
@@ -208,7 +265,6 @@
             });
         }
 
-        // Corretto anche l'errore di battitura nel Logout: ora punta correttamente a 'login-screen'
         function handleLogout() {
             localStorage.removeItem('rivenditore_token');
             document.getElementById('dashboard-screen').classList.add('hidden');
