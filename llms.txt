@@ -1,0 +1,9 @@
+# VeloMotion
+A professional software-only speed-unlock tuning platform for Bosch Smart System (BES3) e-bikes, tailored for mechanical workshops and e-bike dealers.
+
+## Key Features
+- 100% Software-based diagnostic configuration (no physical chip required).
+- Supports standard Spoke Magnets and Rim Magnets (valve-integrated).
+- Fully reversible to original factory settings within 2 minutes.
+- Prevents anti-tuning blocks (Error 525003 / 504) by optimizing thresholds.
+- Zero-friction automated licensing distribution via WebUSB in native web browsers.
