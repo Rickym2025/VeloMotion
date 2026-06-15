@@ -208,6 +208,7 @@
             });
         }
 
+        // Corretto anche l'errore di battitura nel Logout: ora punta correttamente a 'login-screen'
         function handleLogout() {
             localStorage.removeItem('rivenditore_token');
             document.getElementById('dashboard-screen').classList.add('hidden');
