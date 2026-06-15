@@ -926,8 +926,8 @@
         }
 
         // --- CARICAMENTO RUOTA ORBITALE RM STUDIO ---
-        // Utilizziamo l'URL assoluto del tuo dominio master per evitare blocchi sul sottodominio
-        const orbitTemplateUrl = 'https://rmstudio.app/public/orbit-template.html?v=' + new Date().getTime();
+        // Puntiamo al percorso locale: Vercel si occuperà di prelevare l'originale senza blocchi CORS
+        const orbitTemplateUrl = '/public/orbit-template.html?v=' + new Date().getTime();
         
         fetch(orbitTemplateUrl)
             .then(res => {
