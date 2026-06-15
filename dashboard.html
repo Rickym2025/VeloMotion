@@ -21,7 +21,7 @@
         
         <div class="space-y-4 text-left">
             <div>
-                <label for="token-input" class="block text-xs text-gray-500 uppercase mb-2">Inserisci Codice Accesso Officina</label>
+                <label class="block text-xs text-gray-500 uppercase mb-2">Inserisci Codice Accesso Officina</label>
                 <div class="relative">
                     <input type="password" id="token-input" placeholder="Codice Officina..." class="w-full bg-slate-900 border border-gray-700 rounded-xl pl-4 pr-12 py-3 text-white focus:outline-none focus:border-cyan-500 text-center font-mono text-lg">
                     <!-- Pulsante Mostra/Nascondi con icona SVG -->
@@ -40,6 +40,8 @@
                 Accedi alla Dashboard
             </button>
         </div>
+        <p id="login-error" class="hidden text-red-400 text-sm font-semibold">Codice non valido. Riprova.</p>
+    </div>
 
     <!-- SCHERMATA DASHBOARD (Nascosta inizialmente) -->
     <div id="dashboard-screen" class="hidden max-w-xl w-full glass-panel rounded-2xl p-8 neon-border space-y-6">
@@ -108,7 +110,6 @@
     </div>
 
     <script>
-        // Sostituisci con le tue credenziali di Supabase
         const SUPABASE_URL = 'https://ygkxxgnhvyzdsyqceduv.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlna3h4Z25odnl6ZHN5cWNlZHV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MDg2MjQsImV4cCI6MjA5NzA4NDYyNH0.RKB-1xAoJkNw8VhjHJ8u5aVBjSoO4FmZbEGqH4KEpXE';
 
@@ -116,7 +117,6 @@
         let selectedMagnet = '';
         let selectedDisplay = '';
 
-        // Controlla la sessione all'avvio
         window.onload = function() {
             const token = localStorage.getItem('rivenditore_token');
             if (token) {
@@ -142,7 +142,6 @@
                     const nomeOfficina = document.getElementById('nome-officina');
                     const creditiResidui = document.getElementById('crediti-residui');
 
-                    // Questo log ti stamperà in console lo stato di tutti gli elementi per capire quale manca
                     console.log("Stato elementi DOM:", { loginScreen, dashboardScreen, nomeOfficina, creditiResidui });
 
                     if (loginScreen) {
@@ -212,11 +211,10 @@
         function handleLogout() {
             localStorage.removeItem('rivenditore_token');
             document.getElementById('dashboard-screen').classList.add('hidden');
-            document.getElementById('').classList.remove('hidden');
+            document.getElementById('login-screen').classList.remove('hidden');
             document.getElementById('token-input').value = '';
         }
 
-        // Selezione parametri Wizard
         function setMagnete(type) {
             selectedMagnet = type;
             document.getElementById('btn-magnete-raggi').className = type === 'raggi' ? "bg-cyan-500 text-slate-950 p-4 rounded-xl font-bold text-sm text-center transition" : "glass-panel border border-gray-800 p-4 rounded-xl font-bold text-sm text-center transition";
@@ -273,7 +271,6 @@
                 resultTitle.innerText = "COMPATIBILE ✅";
                 resultDesc.innerText = `La bici di ${nomeCliente} è compatibile. Abbiamo scalato 1 credito dal tuo saldo d'officina e inoltrato la richiesta a n8n. Riceverai la notifica di attivazione tra pochi istanti.`;
                 
-                // INVIA RICHIESTA A n8n
                 fetch('https://n8n.rmstudio.app/webhook/velomotion-request', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -301,7 +298,7 @@
             document.getElementById('fw-input').value = '';
             selectedMagnet = '';
             selectedDisplay = '';
-            validaToken(localStorage.getItem('rivenditore_token')); // Ricarica crediti aggiornati
+            validaToken(localStorage.getItem('rivenditore_token'));
         }
     </script>
 </body>
