@@ -136,15 +136,36 @@
             .then(data => {
                 if (data && data.length > 0) {
                     officinaCorrente = data[0];
-                    document.getElementById('').classList.add('hidden');
-                    document.getElementById('nome-officina').innerText = officinaCorrente.nome_officina;
-                    document.getElementById('crediti-residui').innerText = `${officinaCorrente.crediti} Sblocchi`;
-                    document.getElementById('dashboard-screen').classList.remove('hidden');
+                    
+                    const loginScreen = document.getElementById('login-screen');
+                    const dashboardScreen = document.getElementById('dashboard-screen');
+                    const nomeOfficina = document.getElementById('nome-officina');
+                    const creditiResidui = document.getElementById('crediti-residui');
+
+                    // Questo log ti stamperà in console lo stato di tutti gli elementi per capire quale manca
+                    console.log("Stato elementi DOM:", { loginScreen, dashboardScreen, nomeOfficina, creditiResidui });
+
+                    if (loginScreen) {
+                        loginScreen.classList.add('hidden');
+                    }
+                    if (nomeOfficina) {
+                        nomeOfficina.innerText = officinaCorrente.nome_officina;
+                    }
+                    if (creditiResidui) {
+                        creditiResidui.innerText = `${officinaCorrente.crediti} Sblocchi`;
+                    }
+                    if (dashboardScreen) {
+                        dashboardScreen.classList.remove('hidden');
+                    }
                 } else {
                     localStorage.removeItem('rivenditore_token');
+                    const loginError = document.getElementById('login-error');
+                    if (loginError) {
+                        loginError.classList.remove('hidden');
+                    }
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => console.error("Errore validazione token:", err));
         }
 
         function togglePasswordVisibility() {
