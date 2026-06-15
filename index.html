@@ -429,6 +429,18 @@
                     <label class="block text-xs text-gray-500 uppercase mb-2">Descrizione Attività e CAP</label>
                     <textarea name="message" required rows="3" placeholder="Parlaci del tuo volume di riparazioni e-bike e indica il tuo CAP di riferimento..." class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 resize-none"></textarea>
                 </div>
+
+                <!-- Consenso Privacy & Cookie GDPR -->
+                <div class="flex items-start space-x-3 mt-4">
+                    <input type="checkbox" required id="privacy-consent" class="mt-1 w-4 h-4 bg-slate-900 border-gray-700 text-cyan-500 rounded focus:ring-cyan-500 focus:ring-offset-slate-900">
+                    <label for="privacy-consent" class="text-xs text-gray-400 leading-relaxed select-none">
+                        Acconsento al trattamento dei dati in conformità alla <a href="https://rmstudio.app/privacy.html" target="_blank" class="text-cyan-400 hover:underline">Privacy Policy</a> e alla <a href="https://rmstudio.app/termini.html" target="_blank" class="text-cyan-400 hover:underline">Cookie Policy</a> di RM Studio.
+                    </label>
+                </div>
+                
+                <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-4 rounded-xl transition font-outfit shadow-lg shadow-cyan-500/20 mt-4">
+                    Invia Candidatura Officina
+                </button>
                 
                 <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-4 rounded-xl transition font-outfit shadow-lg shadow-cyan-500/20">
                     Invia Candidatura Officina
@@ -437,7 +449,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+   <!-- Footer -->
     <footer class="py-12 px-6 border-t border-gray-800 text-gray-500 text-sm glass-panel mt-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex flex-col items-center md:items-start">
@@ -447,11 +459,17 @@
             
             <div class="flex flex-wrap justify-center gap-6 text-xs">
                 <a href="https://rmstudio.app/" target="_blank" class="hover:text-cyan-400 transition">RM Studio App</a>
+                <span class="text-gray-700">|</span>
                 <a href="https://rmstudio.app/termini.html" target="_blank" class="hover:text-cyan-400 transition">Termini e Condizioni</a>
                 <span class="text-gray-700">|</span>
+                <a href="https://rmstudio.app/privacy.html" target="_blank" class="hover:text-cyan-400 transition">Privacy & Cookie Policy</a>
+                <span class="text-gray-700">|</span>
                 <a href="https://www.facebook.com/riccardo.modena.792" target="_blank" class="hover:text-cyan-400 transition">Facebook</a>
+                <span class="text-gray-700">|</span>
                 <a href="https://www.instagram.com/riccardo_mode_" target="_blank" class="hover:text-cyan-400 transition">Instagram</a>
+                <span class="text-gray-700">|</span>
                 <a href="https://www.linkedin.com/in/riccardo-modena-13918a61/" target="_blank" class="hover:text-cyan-400 transition">LinkedIn</a>
+                <span class="text-gray-700">|</span>
                 <a href="https://tiktok.com/@mr3d.riccardo" target="_blank" class="hover:text-cyan-400 transition">TikTok</a>
             </div>
         </div>
@@ -654,6 +672,169 @@
             document.getElementById('step-result').classList.add('hidden');
             document.getElementById('step-1').classList.remove('hidden');
         }
+
+
+        // --- CHATBOT WIDGET CONTROLLER ---
+        const chatbotWebhookUrl = 'https://n8n.rmstudio.app/webhook/velomotion-chatbot';
+        let isChatOpen = false;
+        let chatSessionId = sessionStorage.getItem('velomotion_chat_session') || '';
+        
+        // Genera un ID sessione unico per mantenere la memoria ad ogni utente
+        if (!chatSessionId) {
+            chatSessionId = 'session_' + Math.random().toString(36).substring(2, 9);
+            sessionStorage.setItem('velomotion_chat_session', chatSessionId);
+        }
+
+        function toggleChatWindow() {
+            const chatWin = document.getElementById('chat-window');
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                chatWin.classList.remove('hidden');
+                setTimeout(() => {
+                    chatWin.classList.replace('scale-95', 'scale-100');
+                }, 50);
+            } else {
+                chatWin.classList.replace('scale-100', 'scale-95');
+                setTimeout(() => {
+                    chatWin.classList.add('hidden');
+                }, 200);
+            }
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            input.value = '';
+            appendMessage('user', message);
+            appendTypingIndicator();
+
+            try {
+                const res = await fetch(chatbotWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        sessionId: chatSessionId
+                    })
+                });
+                const data = await res.json();
+                removeTypingIndicator();
+                if (data && data.success && data.response) {
+                    appendMessage('ai', data.response);
+                } else {
+                    appendMessage('ai', "Scusami, ho riscontrato una temporanea anomalia di rete. Puoi riprovare tra un istante.");
+                }
+            } catch (err) {
+                console.error(err);
+                removeTypingIndicator();
+                appendMessage('ai', "Errore di rete. Assicurati che l'istanza n8n sia attiva.");
+            }
+        }
+
+        function appendMessage(sender, text) {
+            const container = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = "flex items-start space-x-2.5";
+            
+            if (sender === 'user') {
+                msgDiv.className += " justify-end";
+                msgDiv.innerHTML = `
+                    <div class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-200 rounded-2xl rounded-tr-none p-3 max-w-[85%] leading-relaxed">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                msgDiv.innerHTML = `
+                    <img src="/icon.png" class="w-6 h-6 rounded-md mt-1">
+                    <div class="bg-slate-900 border border-gray-800 text-gray-200 rounded-2xl rounded-tl-none p-3 max-w-[85%] leading-relaxed">
+                        ${text}
+                    </div>
+                `;
+            }
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function appendTypingIndicator() {
+            const container = document.getElementById('chat-messages');
+            const indicator = document.createElement('div');
+            indicator.id = 'typing-indicator';
+            indicator.className = "flex items-start space-x-2.5";
+            indicator.innerHTML = `
+                <img src="/icon.png" class="w-6 h-6 rounded-md mt-1">
+                <div class="bg-slate-900 border border-gray-800 text-gray-400 rounded-2xl rounded-tl-none p-3 flex space-x-1 items-center">
+                    <span class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+                    <span class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                    <span class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+                </div>
+            `;
+            container.appendChild(indicator);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) indicator.remove();
+        }
+        
     </script>
+    <!-- CHATBOT WIDGET FLUTTUANTE -->
+    <div id="chatbot-widget" class="fixed bottom-6 right-6 z-50 pointer-events-auto">
+        <!-- Bottone Fluttuante con icona chat -->
+        <button id="chat-toggle-btn" onclick="toggleChatWindow()" class="w-14 h-14 bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all duration-200 focus:outline-none">
+            <svg class="w-6 h-6 text-slate-950" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-emerald-400 border-2 border-slate-950 rounded-full"></span>
+        </button>
+
+        <!-- Finestra di Chat (Nascondi per default) -->
+        <div id="chat-window" class="hidden absolute bottom-20 right-0 w-[320px] sm:w-[380px] h-[480px] glass-panel rounded-2xl neon-border flex flex-col overflow-hidden shadow-2xl transition-all duration-300 transform scale-95 origin-bottom-right">
+            <!-- Intestazione Chat (Header) -->
+            <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-slate-950/80">
+                <div class="flex items-center space-x-3">
+                    <img src="/icon.png" alt="Giulia AI" class="w-8 h-8 rounded-lg">
+                    <div>
+                        <span class="font-bold text-sm text-white block leading-tight font-outfit">Giulia AI</span>
+                        <span class="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider block">Online • Assistente VeloMotion</span>
+                    </div>
+                </div>
+                <button onclick="toggleChatWindow()" class="text-gray-400 hover:text-white transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Area dei Messaggi -->
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-xs scroll-smooth" style="overscroll-behavior: contain;">
+                <!-- Messaggio di Benvenuto Iniziale -->
+                <div class="flex items-start space-x-2.5">
+                    <img src="/icon.png" class="w-6 h-6 rounded-md mt-1">
+                    <div class="bg-slate-900 border border-gray-800 text-gray-200 rounded-2xl rounded-tl-none p-3 max-w-[85%] leading-relaxed">
+                        Ciao! Sono Giulia, l'assistente virtuale d'officina di VeloMotion. Come posso aiutare la tua officina oggi? ⚡
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input di Scrittura (Footer) -->
+            <div class="p-3 border-t border-gray-800 bg-slate-950/80 flex items-center space-x-2">
+                <input type="text" id="chat-input" onkeypress="handleChatKey(event)" placeholder="Chiedimi della compatibilità..." class="flex-1 bg-slate-900 border border-gray-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-500">
+                <button onclick="sendChatMessage()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 p-2.5 rounded-xl transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
