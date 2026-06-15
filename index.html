@@ -60,7 +60,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #0b0f19;
         }
-        h1, h2, h3, .font-outfit {
+        h1, h2, h3, h4, .font-outfit {
             font-family: 'Outfit', sans-serif;
         }
         .neon-border {
@@ -75,6 +75,16 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 99px;
         }
     </style>
 </head>
@@ -97,7 +107,7 @@
 
     <!-- Hero Section -->
     <section class="relative pt-20 pb-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <!-- Decorazione di sfondo -->
+        <!-- Sfondo sfuocato neon -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div class="lg:col-span-7 space-y-6 relative z-10">
@@ -112,12 +122,11 @@
                 La prima soluzione software invisibile che imposta l'assistenza al **limite massimo di 32 km/h reali** [1.1.1]. È la soglia tecnica ideale: mantiene la velocità reale indicata sul display ed evita gli errori di blocco della centralina Bosch Smart System (Errore 504) [1.1.1, 1.1.4].
             </p>
             
-            <!-- Doppie CTA ravvicinate per azzerare l'attrito -->
             <div class="flex flex-col sm:flex-row gap-4 pt-4">
                 <a href="#wizard-section" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-lg px-8 py-4 rounded-xl text-center transition duration-200 shadow-xl shadow-cyan-500/20 font-outfit">
                     Avvia il Verificatore Rapido
                 </a>
-                <a href="mailto:info@rmstudio.app?subject=Richiesta%20Partnership%20VeloMotion" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg px-8 py-4 rounded-xl text-center border border-gray-700 transition duration-200 font-outfit">
+                <a href="#contact-form" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg px-8 py-4 rounded-xl text-center border border-gray-700 transition duration-200 font-outfit">
                     Diventa Officina Partner
                 </a>
             </div>
@@ -298,7 +307,7 @@
     <!-- COMPARAZIONE NEUROSCIENZA: CHIP VS SOFTWARE (TABELLA CONTRASTO) -->
     <section class="py-20 px-6 max-w-7xl mx-auto border-t border-gray-800">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-extrabold text-white font-outfit">Fai un calcolo reale: quanto ti costa il metodo tradicional?</h2>
+            <h2 class="text-3xl font-extrabold text-white font-outfit">Fai un calcolo reale: quanto ti costa il metodo tradizionale?</h2>
             <p class="text-gray-400 mt-2 max-w-xl mx-auto">Non considerare solo il prezzo d'acquisto. Calcola il costo sommerso del tempo bloccato della tua officina.</p>
         </div>
 
@@ -391,33 +400,40 @@
                 <span class="text-3xl">💎</span>
                 <h3 class="text-lg font-bold text-white mt-4 mb-2 font-outfit">Iper-compatibile</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    Funziona perfettamente anche sui complessi motori Bosch con sensore \"Rim Magnet\" integrato sulla valvola del cerchione posteriore, configurazione dove i classici chip fisici esterni falliscono sistematicamente.
+                    Funziona perfettamente anche sui complessi motori Bosch con sensore "Rim Magnet" integrato sulla valvola del cerchione posteriore, configurazione dove i classici chip fisici esterni falliscono sistematicamente.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action Finale -->
-    <section class="py-16 px-6 max-w-5xl mx-auto text-center relative z-10">
-        <div class="glass-panel p-12 rounded-3xl neon-border relative overflow-hidden">
-            <div class="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl"></div>
+    <!-- FORM DI CONTATTO CON WEB3FORMS -->
+    <section id="contact-form" class="py-16 px-6 max-w-xl mx-auto scroll-mt-24">
+        <div class="glass-panel rounded-3xl p-8 border border-white/10 text-center space-y-6">
+            <h3 class="text-2xl font-bold text-white font-outfit">Richiedi la Partnership</h3>
+            <p class="text-sm text-gray-400">Compila il modulo per abilitare la tua officina al servizio di sblocco software.</p>
             
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 font-outfit leading-tight">
-                Inizia a guadagnare offrendo lo Sblocco Digitale.
-            </h2>
-            <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto" style="font-size: 19px;">
-                Diventa il punto di riferimento nella tua zona. Forniamo noi il software e la gestione dell'intervento: tu incassi e fidelizzi il cliente finale.
-            </p>
-            
-            <!-- Doppie CTA ravvicinate per azzerare l'attrito -->
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#wizard-section" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-lg px-8 py-4 rounded-xl transition duration-200 font-outfit shadow-lg shadow-cyan-500/20">
-                    Prova il Verificatore di Compatibilità
-                </a>
-                <a href="mailto:info@rmstudio.app?subject=Richiesta%20Partnership%20VeloMotion" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg px-8 py-4 rounded-xl border border-gray-700 transition duration-200 font-outfit">
-                    Diventa Officina Partner
-                </a>
-            </div>
+            <form onsubmit="handleContactSubmit(event)" class="space-y-4 text-left">
+                <!-- Chiave di Accesso Web3Forms RM Studio -->
+                <input type="hidden" name="access_key" value="9013a8d5-0901-42a0-b9e6-4c45553f960d">
+                <input type="hidden" name="subject" value="Richiesta Nuova Officina Partner - VeloMotion">
+                
+                <div>
+                    <label class="block text-xs text-gray-500 uppercase mb-2">Nome Officina / Ragione Sociale</label>
+                    <input type="text" name="name" required placeholder="Esempio: Cicli Rossi S.r.l." class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-500 uppercase mb-2">Email Aziendale</label>
+                    <input type="email" name="email" required placeholder="Esempio: officina@ciclirossi.it" class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-500 uppercase mb-2">Descrizione Attività e CAP</label>
+                    <textarea name="message" required rows="3" placeholder="Parlaci del tuo volume di riparazioni e-bike e indica il tuo CAP di riferimento..." class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 resize-none"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-4 rounded-xl transition font-outfit shadow-lg shadow-cyan-500/20">
+                    Invia Candidatura Officina
+                </button>
+            </form>
         </div>
     </section>
 
@@ -447,6 +463,35 @@
         let selectedMagnet = '';
         let selectedDisplay = '';
         let inputFirmware = '';
+
+        // Gestione asincrona di Web3Forms
+        async function handleContactSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const button = form.querySelector("button[type='submit']");
+            const originalText = button.innerText;
+            button.innerText = "Invio candidatura...";
+            button.disabled = true;
+
+            try {
+                const res = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+                if (res.ok) {
+                    alert("La tua candidatura è stata inviata con successo! Ti contatteremo entro 24 ore per pianificare l'attivazione della tua officina.");
+                    form.reset();
+                } else {
+                    alert("Errore nell'invio. Si prega di riprovare più tardi.");
+                }
+            } catch {
+                alert("Errore di connessione. Controlla la tua rete internet.");
+            } finally {
+                button.innerText = originalText;
+                button.disabled = false;
+            }
+        }
 
         // Navigazione tra gli Step
         function selectMagnet(magnetType) {
@@ -504,9 +549,6 @@
         }
 
         // Funzione di elaborazione della compatibilità software
-        // Aggiungi un campo di input HTML per il nome cliente prima di questo passaggio nel markup se lo desideri,
-        // oppure leggilo dinamicamente da un input con id="nome-cliente-input"
-
     function processCompatibility() {
           const fwInput = document.getElementById('fw-input').value.trim();
           // Recupera il nome cliente (puoi aggiungere un campo input nel markup con questo ID)
@@ -547,7 +589,7 @@
           } else {
               resultBox.classList.add("bg-amber-500/10", "border-amber-500/20");
               title = "⚠️ Firmware molto recente";
-              description = `La versione software ${fwInput} inserita è troppo recente per lo sblocco software istantaneo. Contattaci per verificare la fattibilità di un aggiornamento dello strumento.`;
+              description = `La versione software ${fwInput} inserita è troppo recente per lo sblocco software istantaneo. Contattaci su WhatsApp per verificare se è disponibile un aggiornamento dello strumento.`;
           }
       
           resultBox.innerHTML = `
