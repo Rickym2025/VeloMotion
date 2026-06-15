@@ -10,8 +10,8 @@
   ],
   "rewrites": [
     {
-      "source": "/public/orbit-template.html",
-      "destination": "https://rmstudio.app/public/orbit-template.html"
+      "source": "/public/orbit-template",
+      "destination": "https://rmstudio.app/orbit-template.html"
     }
   ]
 }
