@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeloMotion | Sblocco Software E-Bike Bosch per Officine e Negozi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Outfit & Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+        }
+        h1, h2, h3, .font-outfit {
+            font-family: 'Outfit', sans-serif;
+        }
+        .neon-border {
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+        .neon-text-cyan {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen overflow-x-hidden">
+
+    <!-- Header / Navbar -->
+    <header class="w-full py-5 px-6 border-b border-gray-800 glass-panel sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-extrabold text-white tracking-tight font-outfit">
+                    VELO<span class="text-cyan-400 neon-text-cyan">MOTION</span>
+                </span>
+                <span class="bg-cyan-500/10 text-cyan-400 text-xs px-2.5 py-1 rounded-full font-semibold border border-cyan-500/20">
+                    RM STUDIO
+                </span>
+            </div>
+            <a href="#wizard-section" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-6 py-2.5 rounded-lg transition duration-200 text-sm font-outfit shadow-lg shadow-cyan-500/20">
+                Verifica Compatibilità
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Decorazione di sfondo -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="lg:col-span-7 space-y-6 relative z-10">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight font-outfit">
+                Zero chip fisici.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 neon-text-cyan">
+                    Sblocco 100% Software
+                </span><br>
+                per i tuoi clienti Bosch.
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-2xl" style="font-size: 19px;">
+                Offri ai tuoi clienti e-bike lo sblocco della velocità senza smontare il motore, senza cablaggi fisici e senza invalidare fisicamente la garanzia. Tu trovi il cliente, noi eseguiamo l'intervento software. Margini elevati, zero rischi d'officina.
+            </p>
+            
+            <!-- Doppie CTA ravvicinate per azzerare l'attrito -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                <a href="#wizard-section" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-lg px-8 py-4 rounded-xl text-center transition duration-200 shadow-xl shadow-cyan-500/20 font-outfit">
+                    Avvia il Verificatore Rapido
+                </a>
+                <a href="https://wa.me/390000000000?text=Ciao%20Riccardo,%20vorrei%20informazioni%20sulla%20partnership%20VeloMotion%20per%20la%20mia%20officina." target="_blank" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg px-8 py-4 rounded-xl text-center border border-gray-700 transition duration-200 font-outfit">
+                    Parla con Riccardo su WhatsApp
+                </a>
+            </div>
+            
+            <div class="flex items-center space-x-6 pt-6 text-sm text-gray-400">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span>Nessun componente installato</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span>Reversibile in 2 minuti</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Vantaggi Finanziari -->
+        <div class="lg:col-span-5 glass-panel rounded-2xl p-8 neon-border relative z-10">
+            <h3 class="text-xl font-bold text-white mb-6 font-outfit text-center border-b border-gray-800 pb-4">
+                L'OPPORTUNITÀ PER LA TUA OFFICINA
+            </h3>
+            <div class="space-y-6">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400">Prezzo consigliato al pubblico:</span>
+                    <span class="text-xl font-bold text-emerald-400">~ 390 €</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400">Costo del nostro servizio:</span>
+                    <span class="text-xl font-bold text-cyan-400">300 €</span>
+                </div>
+                <div class="border-t border-gray-800 pt-4 flex justify-between items-center">
+                    <span class="text-white font-bold">Il tuo guadagno pulito:</span>
+                    <span class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 font-outfit">
+                        + 90 € / bici
+                    </span>
+                </div>
+                <p class="text-xs text-gray-500 text-center leading-relaxed">
+                    Senza tempi morti per i tuoi meccanici. Porti la bici da noi o veniamo noi nella tua officina: colleghiamo il cavo, avviamo il software e la bici è pronta in 5 minuti.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wizard Section -->
+    <section id="wizard-section" class="py-16 px-6 max-w-4xl mx-auto relative z-10 scroll-mt-24">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-white font-outfit">
+                Verificatore di Compatibilità Digitale
+            </h2>
+            <p class="text-gray-400 mt-2">
+                Inserisci i dati tecnici della e-bike del cliente per verificare immediatamente la fattibilità del nostro sblocco software.
+            </p>
+        </div>
+
+        <!-- Wizard Container Card -->
+        <div class="glass-panel rounded-2xl p-8 neon-border">
+            
+            <!-- Step Indicators -->
+            <div class="flex justify-between items-center mb-8 max-w-md mx-auto">
+                <div class="flex flex-col items-center">
+                    <div id="step-dot-1" class="w-8 h-8 rounded-full bg-cyan-500 text-slate-950 font-bold flex items-center justify-center text-sm transition-colors duration-300">1</div>
+                    <span class="text-xs text-gray-400 mt-1">Magnete</span>
+                </div>
+                <div class="h-0.5 bg-gray-800 flex-grow mx-2" id="line-1"></div>
+                <div class="flex flex-col items-center">
+                    <div id="step-dot-2" class="w-8 h-8 rounded-full bg-slate-800 text-gray-400 font-bold flex items-center justify-center text-sm transition-colors duration-300">2</div>
+                    <span class="text-xs text-gray-400 mt-1">Display</span>
+                </div>
+                <div class="h-0.5 bg-gray-800 flex-grow mx-2" id="line-2"></div>
+                <div class="flex flex-col items-center">
+                    <div id="step-dot-3" class="w-8 h-8 rounded-full bg-slate-800 text-gray-400 font-bold flex items-center justify-center text-sm transition-colors duration-300">3</div>
+                    <span class="text-xs text-gray-400 mt-1">Software</span>
+                </div>
+            </div>
+
+            <!-- STEP 1: Magnete -->
+            <div id="step-1" class="space-y-6">
+                <h3 class="text-lg font-bold text-white text-center font-outfit">Dove si trova il magnete originale della ruota posteriore?</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button type="button" onclick="selectMagnet('raggi')" class="glass-panel hover:border-cyan-500/50 p-6 rounded-xl flex flex-col items-center space-y-3 transition duration-200 border border-gray-800">
+                        <span class="text-3xl">⚙️</span>
+                        <span class="font-bold text-white">Sui Raggi della Ruota</span>
+                        <span class="text-xs text-gray-500 text-center">Magnete classico visibile montato su un raggio della ruota posteriore.</span>
+                    </button>
+                    <button type="button" onclick="selectMagnet('valvola')" class="glass-panel hover:border-cyan-500/50 p-6 rounded-xl flex flex-col items-center space-y-3 transition duration-200 border border-gray-800">
+                        <span class="text-3xl">🎈</span>
+                        <span class="font-bold text-white">Sulla Valvola (Rim Magnet)</span>
+                        <span class="text-xs text-gray-500 text-center">Magnete integrato sulla valvola dell'aria del cerchione posteriore.</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Display (Hidden initially) -->
+            <div id="step-2" class="space-y-6 hidden">
+                <h3 class="text-lg font-bold text-white text-center font-outfit">Quale display o comando è installato sul manubrio?</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button type="button" onclick="selectDisplay('purion200')" class="glass-panel hover:border-cyan-500/50 p-4 rounded-xl text-left border border-gray-800 transition duration-200">
+                        <span class="font-bold text-white block">Purion 200</span>
+                        <span class="text-xs text-gray-500">Display compatto a colori con tasti integrati sul lato sinistro.</span>
+                    </button>
+                    <button type="button" onclick="selectDisplay('kiox300')" class="glass-panel hover:border-cyan-500/50 p-4 rounded-xl text-left border border-gray-800 transition duration-200">
+                        <span class="font-bold text-white block">Kiox 300 / Kiox 500</span>
+                        <span class="text-xs text-gray-500">Display a colori centrale montato sopra l'attacco manubrio.</span>
+                    </button>
+                    <button type="button" onclick="selectDisplay('intuvia100')" class="glass-panel hover:border-cyan-500/50 p-4 rounded-xl text-left border border-gray-800 transition duration-200">
+                        <span class="font-bold text-white block">Intuvia 100</span>
+                        <span class="text-xs text-gray-500">Display LCD in bianco e nero di grandi dimensioni.</span>
+                    </button>
+                    <button type="button" onclick="selectDisplay('ledremote')" class="glass-panel hover:border-cyan-500/50 p-4 rounded-xl text-left border border-gray-800 transition duration-200">
+                        <span class="font-bold text-white block">LED Remote (Senza Display)</span>
+                        <span class="text-xs text-gray-500">Solo comando a LED colorati sul manubrio, senza display fisico.</span>
+                    </button>
+                </div>
+                <div class="flex justify-between pt-4">
+                    <button type="button" onclick="goBack(1)" class="text-gray-400 hover:text-white transition font-semibold text-sm">Indietro</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Software Version (Hidden initially) -->
+            <div id="step-3" class="space-y-6 hidden">
+                <h3 class="text-lg font-bold text-white text-center font-outfit">Inserisci la versione software del motore (Drive Unit)</h3>
+                
+                <div class="max-w-md mx-auto space-y-4">
+                    <p class="text-xs text-gray-400 text-center leading-relaxed">
+                        Puoi leggerla direttamente sul display nel menu delle impostazioni: <br>
+                        <span class="text-cyan-400 font-semibold">Impostazioni > La mia eBike > Componenti > Drive Unit</span>.
+                    </p>
+                    <div>
+                        <label for="fw-input" class="block text-xs text-gray-500 uppercase mb-2">Versione Software rilevata (es: 15.24.2 o 19.24.0)</label>
+                        <input type="text" id="fw-input" placeholder="Esempio: 15.24.2" class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 text-center font-mono text-lg">
+                    </div>
+                    <button type="button" onclick="processCompatibility()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-4 rounded-xl transition duration-200 font-outfit">
+                        Analizza Compatibilità
+                    </button>
+                </div>
+                <div class="flex justify-between pt-4">
+                    <button type="button" onclick="goBack(2)" class="text-gray-400 hover:text-white transition font-semibold text-sm">Indietro</button>
+                </div>
+            </div>
+
+            <!-- STEP RESULT: Risultato (Hidden initially) -->
+            <div id="step-result" class="space-y-6 hidden">
+                <div id="result-box" class="p-6 rounded-xl border text-center space-y-4">
+                    <!-- Dynamic content injected here -->
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                    <button type="button" onclick="restartWizard()" class="text-gray-400 hover:text-white transition font-semibold text-sm py-3 px-6 rounded-lg bg-slate-900 border border-gray-800">
+                        Verifica un'altra bici
+                    </button>
+                    <a id="whatsapp-link" href="#" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-3 rounded-lg text-center font-outfit transition duration-200">
+                        Invia Dati e Prenota Sblocco
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Why Us Section (B2B Benefits) -->
+    <section class="py-20 px-6 max-w-7xl mx-auto border-t border-gray-800">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-white font-outfit">Sblocco Software vs Moduli Fisici (Chip)</h2>
+            <p class="text-gray-400 mt-2 max-w-2xl mx-auto">Perché i migliori negozianti stanno abbandonando l'installazione dei chip fisici.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-panel p-8 rounded-xl border border-gray-800">
+                <span class="text-3xl">🛡️</span>
+                <h3 class="text-lg font-bold text-white mt-4 mb-2 font-outfit">Nessuna traccia fisica</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Nessun cavo tagliato, nessun chip nascosto sotto il carter. Se il cliente deve portare la bici in assistenza ufficiale, il software può essere ripristinato allo stato originale in 2 minuti, lasciando il motore intatto fisicamente.
+                </p>
+            </div>
+            <div class="glass-panel p-8 rounded-xl border border-gray-800">
+                <span class="text-3xl">⏱️</span>
+                <h3 class="text-lg font-bold text-white mt-4 mb-2 font-outfit">Zero manodopera d'officina</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    I tuoi meccanici non devono perdere ore a smontare pedivelle, carter protettivi e posizionare microscopici moduli di sblocco. Colleghiamo il cavo alla presa esterna della bici e il lavoro è finito in pochi minuti.
+                </p>
+            </div>
+            <div class="glass-panel p-8 rounded-xl border border-gray-800">
+                <span class="text-3xl">💎</span>
+                <h3 class="text-lg font-bold text-white mt-4 mb-2 font-outfit">Iper-compatibile</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Funziona perfettamente anche sui complessi motori Bosch con sensore "Rim Magnet" integrato sulla valvola del cerchione posteriore, configurazione dove i classici chip fisici esterni falliscono sistematicamente.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Finale -->
+    <section class="py-16 px-6 max-w-5xl mx-auto text-center relative z-10">
+        <div class="glass-panel p-12 rounded-3xl neon-border relative overflow-hidden">
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl"></div>
+            
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 font-outfit leading-tight">
+                Inizia a guadagnare offrendo lo Sblocco Digitale.
+            </h2>
+            <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto" style="font-size: 19px;">
+                Diventa il punto di riferimento nella tua zona. Forniamo noi il software e la gestione dell'intervento: tu incassi e fidelizzi il cliente finale.
+            </p>
+            
+            <!-- Doppie CTA ravvicinate per azzerare l'attrito -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#wizard-section" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-lg px-8 py-4 rounded-xl transition duration-200 font-outfit shadow-lg shadow-cyan-500/20">
+                    Prova il Verificatore di Compatibilità
+                </a>
+                <a href="https://wa.me/390000000000?text=Ciao%20Riccardo,%20vorrei%20attivare%20la%20partnership%20VeloMotion%20nella%20mia%20officina." target="_blank" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg px-8 py-4 rounded-xl border border-gray-700 transition duration-200 font-outfit">
+                    Parla con Riccardo su WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800 text-gray-500 text-sm glass-panel mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="text-lg font-bold text-white font-outfit">VELO<span class="text-cyan-400">MOTION</span></span>
+                <span class="text-xs text-gray-600 mt-1">Sviluppato da RM Studio © 2026</span>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-6 text-xs">
+                <a href="https://rmstudio.app/" target="_blank" class="hover:text-cyan-400 transition">RM Studio App</a>
+                <a href="https://rmstudio.app/termini.html" target="_blank" class="hover:text-cyan-400 transition">Termini e Condizioni</a>
+                <span class="text-gray-700">|</span>
+                <a href="https://www.facebook.com/riccardo.modena.792" target="_blank" class="hover:text-cyan-400 transition">Facebook</a>
+                <a href="https://www.instagram.com/riccardo_mode_" target="_blank" class="hover:text-cyan-400 transition">Instagram</a>
+                <a href="https://www.linkedin.com/in/riccardo-modena-13918a61/" target="_blank" class="hover:text-cyan-400 transition">LinkedIn</a>
+                <a href="https://tiktok.com/@mr3d.riccardo" target="_blank" class="hover:text-cyan-400 transition">TikTok</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Logica del Wizard -->
+    <script>
+        // Stato del Wizard
+        let selectedMagnet = '';
+        let selectedDisplay = '';
+        let inputFirmware = '';
+
+        // Navigazione tra gli Step
+        function selectMagnet(magnetType) {
+            selectedMagnet = magnetType;
+            
+            // Aggiorna indicatori visivi
+            document.getElementById('step-dot-1').classList.remove('bg-cyan-500', 'text-slate-950');
+            document.getElementById('step-dot-1').classList.add('bg-emerald-500', 'text-slate-950');
+            document.getElementById('line-1').classList.replace('bg-gray-800', 'bg-emerald-500');
+            
+            document.getElementById('step-dot-2').classList.replace('bg-slate-800', 'bg-cyan-500');
+            document.getElementById('step-dot-2').classList.replace('text-gray-400', 'text-slate-950');
+
+            // Passa allo step successivo
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+        }
+
+        function selectDisplay(displayType) {
+            selectedDisplay = displayType;
+            
+            // Aggiorna indicatori visivi
+            document.getElementById('step-dot-2').classList.remove('bg-cyan-500', 'text-slate-950');
+            document.getElementById('step-dot-2').classList.add('bg-emerald-500', 'text-slate-950');
+            document.getElementById('line-2').classList.replace('bg-gray-800', 'bg-emerald-500');
+            
+            document.getElementById('step-dot-3').classList.replace('bg-slate-800', 'bg-cyan-500');
+            document.getElementById('step-dot-3').classList.replace('text-gray-400', 'text-slate-950');
+
+            // Passa allo step successivo
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+        }
+
+        function goBack(stepNumber) {
+            if (stepNumber === 1) {
+                // Torna al magnete dallo step 2
+                document.getElementById('step-dot-1').classList.replace('bg-emerald-500', 'bg-cyan-500');
+                document.getElementById('line-1').classList.replace('bg-emerald-500', 'bg-gray-800');
+                document.getElementById('step-dot-2').classList.replace('bg-cyan-500', 'bg-slate-800');
+                document.getElementById('step-dot-2').classList.add('text-gray-400');
+                
+                document.getElementById('step-2').classList.add('hidden');
+                document.getElementById('step-1').classList.remove('hidden');
+            } else if (stepNumber === 2) {
+                // Torna al display dallo step 3
+                document.getElementById('step-dot-2').classList.replace('bg-emerald-500', 'bg-cyan-500');
+                document.getElementById('line-2').classList.replace('bg-emerald-500', 'bg-gray-800');
+                document.getElementById('step-dot-3').classList.replace('bg-cyan-500', 'bg-slate-800');
+                document.getElementById('step-dot-3').classList.add('text-gray-400');
+                
+                document.getElementById('step-3').classList.add('hidden');
+                document.getElementById('step-2').classList.remove('hidden');
+            }
+        }
+
+        // Funzione di elaborazione della compatibilità software
+        // Aggiungi un campo di input HTML per il nome cliente prima di questo passaggio nel markup se lo desideri,
+        // oppure leggilo dinamicamente da un input con id="nome-cliente-input"
+
+    function processCompatibility() {
+          const fwInput = document.getElementById('fw-input').value.trim();
+          // Recupera il nome cliente (puoi aggiungere un campo input nel markup con questo ID)
+          const nomeClienteInput = document.getElementById('nome-cliente-input') ? document.getElementById('nome-cliente-input').value.trim() : "Bici senza nome";
+          
+          if (!fwInput) {
+              alert("Per favore, inserisci la versione del firmware rilevata sul display.");
+              return;
+          }
+          inputFirmware = fwInput;
+      
+          const parts = fwInput.split('.').map(Number);
+          const major = parts[0];
+          const minor = parts[1];
+      
+          const resultBox = document.getElementById('result-box');
+          const whatsappLink = document.getElementById('whatsapp-link');
+          resultBox.className = "p-6 rounded-xl border text-center space-y-4 ";
+      
+          let isCompatible = false;
+          let title = "";
+          let description = "";
+      
+          if (isNaN(major) || isNaN(minor)) {
+              resultBox.classList.add("bg-red-500/10", "border-red-500/20");
+              title = "⚠️ Errore di formato";
+              description = "Il formato del firmware inserito non è valido. Per favore, inserisci un formato corretto.";
+          } else if (selectedMagnet === 'valvola') {
+              if (major < 19 || (major === 19 && minor <= 24)) {
+                  isCompatible = true;
+                  resultBox.classList.add("bg-emerald-500/10", "border-emerald-500/20");
+                  title = "✅ COMPATIBILE CON VELOMOTION (32 km/h)";
+                  description = `La e-bike è compatibile. Applicheremo lo sblocco software a 32 km/h per preservare i calcoli reali sul display.`;
+              } else {
+                  resultBox.classList.add("bg-amber-500/10", "border-amber-500/20");
+                  title = "⚠️ Richiede Kit Hardware Aggiuntivo";
+                  description = `I sistemi Rim Magnet superiori a 19.24.0 non supportano lo sblocco 100% software.`;
+              }
+          } else {
+              if (major < 19 || (major === 19 && minor <= 24)) {
+                  isCompatible = true;
+                  resultBox.classList.add("bg-emerald-500/10", "border-emerald-500/20");
+                  title = "✅ COMPATIBILE CON VELOMOTION (45 km/h)";
+                  description = `La e-bike è totalmente compatibile. Sblocco software fino a 45 km/h garantito.`;
+              } else {
+                  resultBox.classList.add("bg-amber-500/10", "border-amber-500/20");
+                  title = "⚠️ Firmware non supportato";
+                  description = `La versione software inserita è troppo recente per lo sblocco software istantaneo.`;
+              }
+          }
+      
+          resultBox.innerHTML = `
+              <h3 class="text-2xl font-bold font-outfit ${isCompatible ? 'text-emerald-400' : 'text-amber-400'}">${title}</h3>
+              <p class="text-sm text-gray-300 leading-relaxed max-w-xl mx-auto">${description}</p>
+              <div class="text-xs text-gray-500 mt-4">
+                  Parametri rilevati: Magnete: <span class="font-semibold text-white">${selectedMagnet === 'valvola' ? 'Valvola (Rim Magnet)' : 'Raggi'}</span> | 
+                  Display: <span class="font-semibold text-white">${selectedDisplay}</span> | 
+                  Software: <span class="font-semibold text-white">${fwInput}</span>
+              </div>
+          `;
+      
+          // Se è compatibile, invia i dati a n8n in background
+          if (isCompatible) {
+              // Modifica con l'URL reale del tuo Webhook n8n su Hetzner
+              const n8nWebhookUrl = 'https://n8n.rmstudio.app/webhook/velomotion-request'; 
+              
+              fetch(n8nWebhookUrl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                      nome_cliente: nomeClienteInput,
+                      magnete: selectedMagnet,
+                      display: selectedDisplay,
+                      firmware: fwInput
+                  })
+              })
+              .then(response => {
+                  console.log('Dati registrati con successo in n8n');
+              })
+              .catch(err => console.error('Errore durante l\'invio dati a n8n:', err));
+          }
+      
+          // Mantieni il link WhatsApp come fallback o disabilitalo a favore del flusso automatico
+          whatsappLink.href = "#";
+          whatsappLink.innerHTML = "Richiesta Sblocco Inviata";
+          whatsappLink.classList.replace('bg-cyan-500', 'bg-emerald-600');
+          whatsappLink.classList.add('pointer-events-none');
+      
+          document.getElementById('step-3').classList.add('hidden');
+          document.getElementById('step-result').classList.remove('hidden');
+      }
+
+        function restartWizard() {
+            // Reset variabili di stato
+            selectedMagnet = '';
+            selectedDisplay = '';
+            inputFirmware = '';
+            document.getElementById('fw-input').value = '';
+
+            // Reset indicatori visivi step
+            document.getElementById('step-dot-1').className = "w-8 h-8 rounded-full bg-cyan-500 text-slate-950 font-bold flex items-center justify-center text-sm transition-colors duration-300";
+            document.getElementById('step-dot-2').className = "w-8 h-8 rounded-full bg-slate-800 text-gray-400 font-bold flex items-center justify-center text-sm transition-colors duration-300";
+            document.getElementById('step-dot-3').className = "w-8 h-8 rounded-full bg-slate-800 text-gray-400 font-bold flex items-center justify-center text-sm transition-colors duration-300";
+            document.getElementById('line-1').className = "h-0.5 bg-gray-800 flex-grow mx-2";
+            document.getElementById('line-2').className = "h-0.5 bg-gray-800 flex-grow mx-2";
+
+            // Torna allo step 1
+            document.getElementById('step-result').classList.add('hidden');
+            document.getElementById('step-1').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
