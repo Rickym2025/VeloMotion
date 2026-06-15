@@ -88,128 +88,127 @@
         }
 
         /* ─── ANIMAZIONI E STILI PER IL SISTEMA ORBITALE ECOsistema ─── */
-    @keyframes orbit-rotation {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes counter-rotation {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(-360deg); }
-    }
-    @keyframes pulse-ring-optimized {
-      0%, 100% { opacity: 0.15; transform: scale(0.95); }
-      50% { opacity: 0.35; transform: scale(1.05); }
-    }
-    .pulse-ring-element {
-      position: absolute;
-      width: 360px;
-      height: 360px;
-      background-color: rgba(6, 182, 212, 0.05);
-      filter: blur(48px);
-      border-radius: 9999px;
-      will-change: transform, opacity;
-      animation: pulse-ring-optimized 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    .orbit-ring {
-      position: relative;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
-      animation: orbit-rotation 40s linear infinite;
-    }
-    .orbit-wrapper {
-      position: absolute;
-      width: 56px;
-      height: 56px;
-      transform: translate(-50%, -50%);
-    }
-    .orbit-item {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      animation: counter-rotation 40s linear infinite;
-      transform-origin: center;
-    }
-    .orbit-link {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-sizing: border-box;
-      transition: 0.3s;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      text-decoration: none;
-    }
-    .orbit-link:hover {
-      border-color: #06b6d4;
-      box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
-    }
-    .orbit-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .orbit-img.cover {
-      object-fit: cover;
-    }
-    .orbit-img.rounded {
-      border-radius: 9999px;
-    }
-    .orbit-center-photo {
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 4px solid #06b6d4;
-      padding: 4px;
-      background: #000;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-      z-index: 10;
-      box-sizing: border-box;
-    }
-    .orbit-center-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    .orbit-tooltip {
-      position: absolute;
-      bottom: 75px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      background: #0a0a0c;
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #94a3b8;
-      font-size: 11px;
-      border-radius: 8px;
-      padding: 10px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      text-align: center;
-      z-index: 100;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      line-height: 1.4;
-    }
-    .orbit-tooltip b {
-      color: white;
-      display: block;
-      margin-bottom: 4px;
-    }
-    .orbit-item:hover .orbit-tooltip {
-      opacity: 1;
-    }
-        
+        @keyframes orbit-rotation {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes counter-rotation {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(-360deg); }
+        }
+        @keyframes pulse-ring-optimized {
+          0%, 100% { opacity: 0.15; transform: scale(0.95); }
+          50% { opacity: 0.35; transform: scale(1.05); }
+        }
+        .pulse-ring-element {
+          position: absolute;
+          width: 360px;
+          height: 360px;
+          background-color: rgba(6, 182, 212, 0.05);
+          filter: blur(48px);
+          border-radius: 9999px;
+          will-change: transform, opacity;
+          animation: pulse-ring-optimized 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .orbit-ring {
+          position: relative;
+          width: 360px;
+          height: 360px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+          animation: orbit-rotation 40s linear infinite;
+        }
+        .orbit-wrapper {
+          position: absolute;
+          width: 56px;
+          height: 56px;
+          transform: translate(-50%, -50%);
+        }
+        .orbit-item {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          animation: counter-rotation 40s linear infinite;
+          transform-origin: center;
+        }
+        .orbit-link {
+          display: flex;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          border: 1px solid rgba(255,255,255,0.1);
+          box-sizing: border-box;
+          transition: 0.3s;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          text-decoration: none;
+        }
+        .orbit-link:hover {
+          border-color: #06b6d4;
+          box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+        .orbit-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+        .orbit-img.cover {
+          object-fit: cover;
+        }
+        .orbit-img.rounded {
+          border-radius: 9999px;
+        }
+        .orbit-center-photo {
+          position: absolute;
+          width: 160px;
+          height: 160px;
+          border-radius: 50%;
+          border: 4px solid #06b6d4;
+          padding: 4px;
+          background: #000;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+          z-index: 10;
+          box-sizing: border-box;
+        }
+        .orbit-center-photo img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+        .orbit-tooltip {
+          position: absolute;
+          bottom: 75px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 200px;
+          background: #0a0a0c;
+          border: 1px solid rgba(255,255,255,0.08);
+          color: #94a3b8;
+          font-size: 11px;
+          border-radius: 8px;
+          padding: 10px;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.2s;
+          text-align: center;
+          z-index: 100;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          line-height: 1.4;
+        }
+        .orbit-tooltip b {
+          color: white;
+          display: block;
+          margin-bottom: 4px;
+        }
+        .orbit-item:hover .orbit-tooltip {
+          opacity: 1;
+        }
     </style>
 </head>
 <body class="text-gray-200 min-h-screen overflow-x-hidden">
@@ -524,7 +523,7 @@
                 <span class="text-3xl">💎</span>
                 <h3 class="text-lg font-bold text-white mt-4 mb-2 font-outfit">Iper-compatibile</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">
-                    Funziona perfettamente anche sui complessi motori Bosch con sensore "Rim Magnet" integrato sulla valvola del cerchione posteriore, configurazione dove i classici chip fisici esterni falliscono sistematicamente.
+                    Funziona perfettamente anche sui complessi motori Bosch con sensore \"Rim Magnet\" integrato sulla valvola del cerchione posteriore, configurazione dove i classici chip fisici esterni falliscono sistematicamente.
                 </p>
             </div>
         </div>
@@ -550,8 +549,8 @@
                     <input type="email" name="email" required placeholder="Esempio: officina@ciclirossi.it" class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500">
                 </div>
                 <div>
-                    <label class="block text-xs text-gray-500 uppercase mb-2">Descrizione Attività e CAP</label>
-                    <textarea name="message" required rows="3" placeholder="Parlaci del tuo volume di riparazioni e-bike e indica il tuo CAP di riferimento..." class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 resize-none"></textarea>
+                    <label class="block text-xs text-gray-500 uppercase mb-2">Telefono Officina</label>
+                    <input type="text" name="phone" required placeholder="Esempio: +39 333 1234567" class="w-full bg-slate-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500">
                 </div>
 
                 <!-- Consenso Privacy & Cookie GDPR -->
@@ -563,10 +562,6 @@
                 </div>
                 
                 <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-4 rounded-xl transition font-outfit shadow-lg shadow-cyan-500/20 mt-4">
-                    Invia Candidatura Officina
-                </button>
-                
-                <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-4 rounded-xl transition font-outfit shadow-lg shadow-cyan-500/20">
                     Invia Candidatura Officina
                 </button>
             </form>
@@ -752,7 +747,7 @@
           } else {
               resultBox.classList.add("bg-amber-500/10", "border-amber-500/20");
               title = "⚠️ Firmware molto recente";
-              description = `La versione software ${fwInput} inserita è troppo recente per lo sblocco software istantaneo. Contattaci su WhatsApp per verificare se è disponibile un aggiornamento dello strumento.`;
+              description = `La versione software ${fwInput} inserita è troppo recente per lo sblocco software istantaneo. Contattaci per verificare la fattibilità di un aggiornamento dello strumento.`;
           }
       
           resultBox.innerHTML = `
@@ -964,9 +959,9 @@
             <!-- Intestazione Chat (Header) -->
             <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-slate-950/80">
                 <div class="flex items-center space-x-3">
-                    <img src="/icon.png" alt="Giulia AI" class="w-8 h-8 rounded-lg">
+                    <img src="/icon.png" alt="Valentina AI" class="w-8 h-8 rounded-lg">
                     <div>
-                        <span class="font-bold text-sm text-white block leading-tight font-outfit">Giulia AI</span>
+                        <span class="font-bold text-sm text-white block leading-tight font-outfit">Valentina AI</span>
                         <span class="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider block">Online • Assistente VeloMotion</span>
                     </div>
                 </div>
@@ -983,7 +978,7 @@
                 <div class="flex items-start space-x-2.5">
                     <img src="/icon.png" class="w-6 h-6 rounded-md mt-1">
                     <div class="bg-slate-900 border border-gray-800 text-gray-200 rounded-2xl rounded-tl-none p-3 max-w-[85%] leading-relaxed">
-                        Ciao! Sono Giulia, l'assistente virtuale d'officina di VeloMotion. Come posso aiutare la tua officina oggi? ⚡
+                        Ciao! Sono Valentina, l'assistente virtuale d'officina di VeloMotion. Come posso aiutare la tua officina oggi? ⚡
                     </div>
                 </div>
             </div>
