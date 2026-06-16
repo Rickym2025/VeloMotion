@@ -43,7 +43,7 @@
         <p id="login-error" class="hidden text-red-400 text-sm font-semibold">Codice non valido. Riprova.</p>
     </div>
 
-    <!-- SCHERMATA DASHBOARD -->
+    <!-- SCHERMATA DASHBOARD (Nascosta inizialmente) -->
     <div id="dashboard-screen" class="hidden max-w-xl w-full glass-panel rounded-2xl p-8 neon-border space-y-6">
         
         <!-- Header Info Officina -->
@@ -55,6 +55,25 @@
             <div class="text-right">
                 <span class="text-xs text-gray-500 uppercase tracking-wider block">Crediti Residui</span>
                 <span id="crediti-residui" class="text-2xl font-black text-emerald-400 block">-</span>
+            </div>
+        </div>
+
+        <!-- ALERT CREDITI QUASI ESAURITI (NEUROMARKETING LOSS AVERSION) -->
+        <div id="low-credits-alert" class="hidden glass-panel p-5 rounded-2xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent space-y-4 relative overflow-hidden animate-pulse">
+            <div class="absolute -top-12 -left-12 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl"></div>
+            <div class="flex items-start space-x-3.5 relative z-10">
+                <span class="text-2xl mt-0.5 block">⚠️</span>
+                <div class="space-y-1">
+                    <h4 class="text-sm font-bold text-amber-400 font-outfit uppercase tracking-wider">Ricarica di Sicurezza Consigliata</h4>
+                    <p id="low-credits-text" class="text-xs text-gray-300 leading-relaxed max-w-md">
+                        Attenzione! Il tuo saldo è quasi esaurito. Evita di trovarti bloccato con la bici del prossimo cliente sul cavalletto. Assicura la continuità del servizio adesso.
+                    </p>
+                </div>
+            </div>
+            <div class="pt-1 text-right relative z-10">
+                <a href="#btn-acquista-ricarica" class="inline-block bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] tracking-widest font-black uppercase px-5 py-2.5 rounded-lg transition duration-200 font-mono shadow-lg shadow-amber-500/20">
+                    Ricarica Ora
+                </a>
             </div>
         </div>
 
@@ -162,8 +181,8 @@
         let selectedDisplay = '';
         
         let currentQty = 1;
-        let activePrice = 290; // Default: Software sblocco a 290
-        let activeStripeLinkId = "LINK_STRIPE_SOFTWARE_32"; // Inserisci il link Stripe per lo sblocco software
+        let activePrice = 290; 
+        let activeStripeLinkId = "LINK_STRIPE_SOFTWARE_32"; // Sostituisci con il link Stripe reale da 290€
 
         window.onload = function() {
             const token = localStorage.getItem('rivenditore_token');
@@ -202,6 +221,18 @@
                         creditiResidui.innerText = `${officinaCorrente.crediti} Sblocchi`;
                     }
                     
+                    // --- CONTROLLO NEUROMARKETING CREDITI RESIDUI ---
+                    const lowCreditsAlert = document.getElementById('low-credits-alert');
+                    if (lowCreditsAlert) {
+                        if (officinaCorrente.crediti <= 2) {
+                            const sblocchiText = officinaCorrente.crediti === 1 ? 'solo 1 sblocco rimanente' : `solo ${officinaCorrente.crediti} sblocchi rimanenti`;
+                            document.getElementById('low-credits-text').innerHTML = `Attenzione! Hai <strong>${sblocchiText}</strong> nel tuo portafoglio d'officina. Evita di trovarti bloccato con la bici del prossimo cliente sul cavalletto. Assicura la continuità del tuo servizio adesso.`;
+                            lowCreditsAlert.classList.remove('hidden');
+                        } else {
+                            lowCreditsAlert.classList.add('hidden');
+                        }
+                    }
+
                     updateStripeLink();
 
                     if (dashboardScreen) {
@@ -219,19 +250,18 @@
             .catch(err => console.error("Errore validazione token:", err));
         }
 
-        // Gestione Cambio Tipo Ricarica (Software vs Hardware)
         function setRicaricaType(type) {
             const btnSoft = document.getElementById('btn-type-software');
             const btnHard = document.getElementById('btn-type-hardware');
 
             if (type === 'software') {
                 activePrice = 290;
-                activeStripeLinkId = "LINK_STRIPE_SOFTWARE_32"; // ID link Stripe da €290
+                activeStripeLinkId = "LINK_STRIPE_SOFTWARE_32"; // Sostituisci con il link reale da 290€
                 btnSoft.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition";
                 btnHard.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition";
             } else {
                 activePrice = 320;
-                activeStripeLinkId = "LINK_STRIPE_HARDWARE_45"; // ID link Stripe da €320
+                activeStripeLinkId = "LINK_STRIPE_HARDWARE_45"; // Sostituisci con il link reale da 320€
                 btnSoft.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition";
                 btnHard.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition";
             }
