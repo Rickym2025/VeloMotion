@@ -43,7 +43,7 @@
         <p id="login-error" class="hidden text-red-400 text-sm font-semibold">Codice non valido. Riprova.</p>
     </div>
 
-    <!-- SCHERMATA DASHBOARD (Nascosta inizialmente) -->
+    <!-- SCHERMATA DASHBOARD -->
     <div id="dashboard-screen" class="hidden max-w-xl w-full glass-panel rounded-2xl p-8 neon-border space-y-6">
         
         <!-- Header Info Officina -->
@@ -62,10 +62,20 @@
         <div class="glass-panel p-6 rounded-xl border border-gray-800 space-y-6">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider font-outfit text-center">Acquista Sblocchi d'Officina</h4>
             
-            <div class="flex items-center justify-between bg-slate-950/60 p-4 rounded-xl border border-gray-800">
+            <!-- Toggle per tipo sblocco -->
+            <div class="grid grid-cols-2 gap-2 bg-slate-950/60 p-1.5 rounded-xl border border-gray-800">
+                <button id="btn-type-software" onclick="setRicaricaType('software')" class="bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition">
+                    Software (32 km/h) • €290
+                </button>
+                <button id="btn-type-hardware" onclick="setRicaricaType('hardware')" class="text-gray-400 py-2.5 rounded-lg text-xs font-bold transition">
+                    Hardware (45 km/h) • €320
+                </button>
+            </div>
+
+            <div class="flex items-center justify-between bg-slate-950/40 p-4 rounded-xl border border-gray-800">
                 <div class="text-left">
-                    <span class="text-xs text-gray-500 uppercase block">Prezzo Singolo Sblocco</span>
-                    <span class="text-lg font-extrabold text-white">€ 300,00</span>
+                    <span class="text-xs text-gray-500 block">Prezzo Unitario</span>
+                    <span id="unit-price-display" class="text-lg font-extrabold text-white">€ 290,00</span>
                 </div>
                 
                 <!-- Selettore Quantità -->
@@ -83,8 +93,8 @@
             <!-- Riepilogo e Pulsante di Acquisto -->
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
                 <div class="text-left w-full sm:w-auto">
-                    <span class="text-xs text-gray-500 uppercase block">Totale Carrello</span>
-                    <span id="total-price-display" class="text-2xl font-black text-cyan-400">€ 300,00</span>
+                    <span class="text-xs text-gray-500 block">Totale Carrello</span>
+                    <span id="total-price-display" class="text-2xl font-black text-cyan-400">€ 290,00</span>
                 </div>
                 <a id="btn-acquista-ricarica" href="#" target="_blank" class="w-full sm:w-auto bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 py-4 rounded-xl text-center font-outfit shadow-lg shadow-cyan-500/20">
                     Acquista Ora su Stripe
@@ -150,7 +160,10 @@
         let officinaCorrente = null;
         let selectedMagnet = '';
         let selectedDisplay = '';
+        
         let currentQty = 1;
+        let activePrice = 290; // Default: Software sblocco a 290
+        let activeStripeLinkId = "LINK_STRIPE_SOFTWARE_32"; // Inserisci il link Stripe per lo sblocco software
 
         window.onload = function() {
             const token = localStorage.getItem('rivenditore_token');
@@ -189,11 +202,10 @@
                         creditiResidui.innerText = `${officinaCorrente.crediti} Sblocchi`;
                     }
                     
-                    // Configura il link di acquisto Stripe in base all'email dell'officina loggata
                     updateStripeLink();
 
                     if (dashboardScreen) {
-                        document.getElementById('total-price-display').innerText = `€ ${(currentQty * 300).toFixed(2).replace('.', ',')}`;
+                        updatePriceDisplay();
                         dashboardScreen.classList.remove('hidden');
                     }
                 } else {
@@ -207,20 +219,44 @@
             .catch(err => console.error("Errore validazione token:", err));
         }
 
-        // Gestione quantità e calcolo dinamico Stripe
+        // Gestione Cambio Tipo Ricarica (Software vs Hardware)
+        function setRicaricaType(type) {
+            const btnSoft = document.getElementById('btn-type-software');
+            const btnHard = document.getElementById('btn-type-hardware');
+
+            if (type === 'software') {
+                activePrice = 290;
+                activeStripeLinkId = "LINK_STRIPE_SOFTWARE_32"; // ID link Stripe da €290
+                btnSoft.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition";
+                btnHard.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition";
+            } else {
+                activePrice = 320;
+                activeStripeLinkId = "LINK_STRIPE_HARDWARE_45"; // ID link Stripe da €320
+                btnSoft.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition";
+                btnHard.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition";
+            }
+            
+            document.getElementById('unit-price-display').innerText = `€ ${activePrice},00`;
+            updatePriceDisplay();
+            updateStripeLink();
+        }
+
         function changeQty(amount) {
             currentQty = Math.max(1, currentQty + amount);
             document.getElementById('qty-display').innerText = currentQty;
-            document.getElementById('total-price-display').innerText = `€ ${(currentQty * 300).toFixed(2).replace('.', ',')}`;
+            updatePriceDisplay();
             updateStripeLink();
+        }
+
+        function updatePriceDisplay() {
+            const total = currentQty * activePrice;
+            document.getElementById('total-price-display').innerText = `€ ${total.toFixed(2).replace('.', ',')}`;
         }
 
         function updateStripeLink() {
             if (officinaCorrente) {
-                // Sostituisci "YOUR_STRIPE_LINK_ID" con l'ID reale del tuo unico link Stripe da €300
-                const stripeLinkId = "YOUR_STRIPE_LINK_ID"; 
                 const encodedEmail = encodeURIComponent(officinaCorrente.email);
-                document.getElementById('btn-acquista-ricarica').href = `https://buy.stripe.com/${stripeLinkId}?prefilled_email=${encodedEmail}&quantity=${currentQty}`;
+                document.getElementById('btn-acquista-ricarica').href = `https://buy.stripe.com/${activeStripeLinkId}?prefilled_email=${encodedEmail}&quantity=${currentQty}`;
             }
         }
 
