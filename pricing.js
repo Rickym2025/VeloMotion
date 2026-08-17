@@ -7,6 +7,33 @@ const VELOMOTION_PRICES = {
   hardware: { id: "hardware", name: "Sblocco Hardware (45 km/h)", unitPrice: 320 }
 };
 
+// 1. Sincronizzazione automatica prezzi dal Portale Master / Supabase
+async function initVeloMotionPricing() {
+  try {
+    const res = await fetch("https://zqkqlhosyjvxdwfjmwwb.supabase.co/rest/v1/saas_pricing?saas=eq.velomotion&select=*");
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        data.forEach(item => {
+          const pid = (item.plan_id || "").toLowerCase();
+          if (VELOMOTION_PRICES[pid]) {
+            VELOMOTION_PRICES[pid].unitPrice = Number(item.price);
+          }
+        });
+      }
+    }
+  } catch (e) {
+    console.warn("Utilizzo prezzi locali per VeloMotion:", e);
+  }
+
+  // Aggiorna eventuali elementi DOM nella landing/dashboard
+  const elSoft = document.getElementById("price-software-val");
+  const elHard = document.getElementById("price-hardware-val");
+  if (elSoft) elSoft.innerText = `${VELOMOTION_PRICES.software.unitPrice} €`;
+  if (elHard) elHard.innerText = `${VELOMOTION_PRICES.hardware.unitPrice} €`;
+}
+
+// 2. Checkout Stripe On-The-Fly
 async function avviaCheckoutVeloMotion(type = "software", quantity = 1, officina = null) {
   const plan = VELOMOTION_PRICES[type] || VELOMOTION_PRICES.software;
   const totalPrice = plan.unitPrice * Math.max(1, Number(quantity) || 1);
@@ -61,3 +88,5 @@ async function avviaCheckoutVeloMotion(type = "software", quantity = 1, officina
     }
   }
 }
+
+document.addEventListener("DOMContentLoaded", initVeloMotionPricing);
