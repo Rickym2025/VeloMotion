@@ -28,7 +28,7 @@
             <div id="code-section" class="bg-slate-900 border border-gray-800 rounded-xl p-4 space-y-3">
                 <span class="text-xs text-gray-500 uppercase block">Codice Licenza Sblocco</span>
                 <div id="license-code" class="font-mono text-cyan-400 font-bold text-lg select-all tracking-wider">-</div>
-                <button onclick="copyCode()" class="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 text-xs font-semibold px-4 py-2 rounded-lg border border-cyan-500/20 transition">
+                <button onclick="copyCode()" class="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 text-xs font-semibold px-4 py-2 rounded-lg border border-cyan-500/20 transition cursor-pointer">
                     Copia Codice
                 </button>
             </div>
@@ -49,11 +49,9 @@
     </div>
 
     <script>
-        // Sostituisci con le tue chiavi reali di Supabase
-        const SUPABASE_URL = 'https://YOUR_SUPABASE_PROJECT.supabase.co';
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        const SUPABASE_URL = 'https://ygkxxgnhvyzdsyqceduv.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlna3h4Z25odnl6ZHN5cWNlZHV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MDg2MjQsImV4cCI6MjA5NzA4NDYyNH0.RKB-1xAoJkNw8VhjHJ8u5aVBjSoO4FmZbEGqH4KEpXE';
 
-        // Estrai ID dalla barra indirizzi
         const urlParams = new URLSearchParams(window.location.search);
         const sbloccoId = urlParams.get('id');
 
