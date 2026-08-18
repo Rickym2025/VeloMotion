@@ -221,14 +221,14 @@
             const btnSoft = document.getElementById('btn-type-software');
             const btnHard = document.getElementById('btn-type-hardware');
 
+            activePrice = VELOMOTION_PRICES[type] ? VELOMOTION_PRICES[type].unitPrice : (type === 'software' ? 290 : 320);
+
             if (type === 'software') {
-                activePrice = 290;
-                btnSoft.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition";
-                btnHard.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition";
+                btnSoft.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition cursor-pointer";
+                btnHard.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition cursor-pointer";
             } else {
-                activePrice = 320;
-                btnSoft.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition";
-                btnHard.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition";
+                btnSoft.className = "text-gray-400 py-2.5 rounded-lg text-xs font-bold transition cursor-pointer";
+                btnHard.className = "bg-cyan-500 text-slate-950 py-2.5 rounded-lg text-xs font-bold transition cursor-pointer";
             }
             
             document.getElementById('unit-price-display').innerText = `€ ${activePrice},00`;
